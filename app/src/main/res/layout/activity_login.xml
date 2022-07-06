@@ -33,6 +33,7 @@
           />
 
       <EditText
+          android:id="@+id/login_email"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@drawable/edittext_shape"
@@ -47,6 +48,7 @@
           />
 
       <EditText
+          android:id="@+id/login_password"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@drawable/edittext_shape"
@@ -61,6 +63,7 @@
           />
 
       <TextView
+          android:id="@+id/login_signIn"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Sign In"
