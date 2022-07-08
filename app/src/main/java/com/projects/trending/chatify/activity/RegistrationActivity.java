@@ -1,10 +1,9 @@
-package com.projects.trending.chatify;
+package com.projects.trending.chatify.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.projects.trending.chatify.R;
 import com.projects.trending.chatify.models.Users;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
     FirebaseStorage firebaseStorage ;
     String fbImageURI ;
     ProgressDialog progressDialog ;
-
+    String userStatus = "Hi there! I'm Using Chatify";
 
 
     @Override
@@ -128,7 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                                       fbImageURI = uri.toString() ;
 
                                                       // Saving the User object to Firebase Database
-                                                      Users users = new Users(auth.getUid(),name,email,fbImageURI);
+                                                      Users users = new Users(auth.getUid(),name,email,fbImageURI,userStatus);
                                                       databaseReference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                           @Override
                                                           public void onComplete(@NonNull Task<Void> task) {
@@ -154,7 +152,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                   fbImageURI = "https://firebasestorage.googleapis.com/v0/b/playstoreapps-e9008.appspot.com/o/profile_image.png?alt=media&token=1ce6082d-bbf7-4aa5-8ae3-26cf4813e03c" ;
 
                                   // Saving the User object to Firebase Database
-                                  Users users = new Users(auth.getUid(),name,email,fbImageURI);
+                                  Users users = new Users(auth.getUid(),name,email,fbImageURI,userStatus);
                                   databaseReference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                       @Override
                                       public void onComplete(@NonNull Task<Void> task) {
