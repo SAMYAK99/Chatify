@@ -67,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         Picasso.get().load(reciverImg).into(reciverIMG);
         recyclerViewMessages = findViewById(R.id.recycle_MessageAdapter);
 
+
         sendBtn = findViewById(R.id.send_btn);
         sendMessage = findViewById(R.id.et_message);
 

@@ -204,7 +204,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    // Setting the value for Image in image URI
+    // Taking the picture from gallery and set it on profile Image
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

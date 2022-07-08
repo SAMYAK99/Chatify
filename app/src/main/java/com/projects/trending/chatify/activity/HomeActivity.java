@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,8 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView mainRecyclerView ;
     UserAdapter adapter ;
     ArrayList<Users> userArrayList ;
-    ImageView imgLogut ;
-    TextView noBtn ,yesBtn ;
+    ImageView imgLogut ,   settingsImg ;
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +44,22 @@ public class HomeActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance() ;
         userArrayList = new ArrayList<Users>();
         imgLogut = findViewById(R.id.img_logout);
-
+        settingsImg = findViewById(R.id.img_settings);
 
 
         imgLogut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(HomeActivity.this);
+                Dialog dialog = new Dialog(HomeActivity.this,R.style.Dialogue);
                 dialog.setContentView(R.layout.dialog_layout);
-
+                TextView noBtn ,yesBtn ;
                 noBtn = findViewById(R.id.no_btn);
                 yesBtn = findViewById(R.id.yes_btn);
 
                 yesBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
+                        firebaseAuth.signOut();
                         startActivity(new Intent(HomeActivity.this,LoginActivity.class));
                     }
                 });
@@ -69,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+
                 dialog.show();
             }
         });
@@ -100,5 +102,25 @@ public class HomeActivity extends AppCompatActivity {
         if(firebaseAuth.getCurrentUser() == null){
             startActivity(new Intent(HomeActivity.this ,RegistrationActivity.class));
         }
+
+
+        settingsImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this ,SettingsActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            pressedTime = System.currentTimeMillis();
+        }
+
     }
 }

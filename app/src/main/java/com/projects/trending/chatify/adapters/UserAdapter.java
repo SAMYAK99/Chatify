@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.projects.trending.chatify.activity.ChatActivity;
 import com.projects.trending.chatify.activity.HomeActivity;
 import com.projects.trending.chatify.R;
@@ -42,6 +43,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users user = userArrayList.get(position);
+
+        // Removing the current User from Chat App
+        if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user.getUid())){
+            holder.itemView.setVisibility(View.GONE);
+        }
+
+
         holder.userName.setText(user.getName());
         holder.userStatus.setText(user.getStatus());
         Picasso.get().load(user.getImageUri()).into(holder.userImage);

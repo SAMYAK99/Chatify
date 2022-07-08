@@ -2,17 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.projects.trending.chatify">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/chatlogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/chatlogo"
         android:screenOrientation="portrait"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Chatify">
-        <activity android:name=".activity.ChatActivity"></activity>
+        android:theme="@style/Theme.Chatify"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".activity.ChatActivity" />
         <activity android:name=".activity.RegistrationActivity" />
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.LoginActivity" />
