@@ -1,57 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.SettingsActivity">
 
-    <ImageView
-        android:id="@+id/settings_done"
-        android:layout_width="40dp"
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:padding="5dp"
-        android:background="@drawable/done"
-        android:layout_margin="10dp"
-        />
+        android:layout_gravity="center"
+        android:background="@color/primary_blue"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="Edit Profile"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/settings_img"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/profile_image"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/profile"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="1dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/settings_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/signin_shape"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Save  ✔️"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/settings_status"
+        app:layout_constraintStart_toStartOf="@+id/settings_status"
+        app:layout_constraintTop_toBottomOf="@+id/settings_status" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintBottom_toTopOf="@+id/setting_name"
+        app:layout_constraintStart_toStartOf="@+id/setting_name" />
 
     <EditText
         android:id="@+id/setting_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textColor="@color/black"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_medium"
-        android:textSize="24sp"
-        android:layout_marginBottom="20dp"
-        />
+        android:gravity="start"
+        android:padding="4dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/settings_img"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/settings_img"
+        app:layout_constraintTop_toBottomOf="@+id/settings_img" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintBottom_toTopOf="@+id/settings_status"
+        app:layout_constraintStart_toStartOf="@+id/settings_status" />
     <EditText
         android:id="@+id/settings_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textColor="@color/black"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_regular"
+        android:gravity="start"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginBottom="20dp"
-        />
+        app:layout_constraintEnd_toEndOf="@+id/setting_name"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/setting_name"
+        app:layout_constraintTop_toBottomOf="@+id/setting_name" />
 
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

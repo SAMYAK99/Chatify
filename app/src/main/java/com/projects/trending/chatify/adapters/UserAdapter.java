@@ -44,28 +44,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users user = userArrayList.get(position);
 
-        // Removing the current User from Chat App
-        if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user.getUid())){
-            holder.itemView.setVisibility(View.GONE);
+            holder.userName.setText(user.getName());
+            holder.userStatus.setText(user.getStatus());
+            Picasso.get().load(user.getImageUri()).into(holder.userImage);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(homeActivity, ChatActivity.class);
+                    intent.putExtra("name", user.getName());
+                    intent.putExtra("ReciverImage", user.getImageUri());
+                    intent.putExtra("uid", user.getUid());
+                    homeActivity.startActivity(intent);
+
+                }
+            });
         }
-
-
-        holder.userName.setText(user.getName());
-        holder.userStatus.setText(user.getStatus());
-        Picasso.get().load(user.getImageUri()).into(holder.userImage);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(homeActivity, ChatActivity.class);
-                intent.putExtra("name",user.getName());
-                intent.putExtra("ReciverImage",user.getImageUri());
-                intent.putExtra("uid",user.getUid());
-                homeActivity.startActivity(intent);
-
-            }
-        });
-    }
 
 
 

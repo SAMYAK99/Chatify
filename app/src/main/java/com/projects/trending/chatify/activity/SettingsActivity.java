@@ -34,15 +34,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    CircleImageView setting_image ;
-    EditText setting_status  , setting_name;
+    CircleImageView setting_image;
+    EditText setting_status, setting_name;
     FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase ;
-    FirebaseStorage firebaseStorage ;
-    ImageView done ;
-    Uri imageUri ;
-    String email ;
-    ProgressDialog progressDialog ;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseStorage firebaseStorage;
+    TextView done;
+    Uri imageUri;
+    String email;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +51,22 @@ public class SettingsActivity extends AppCompatActivity {
 
         setting_image = findViewById(R.id.settings_img);
         setting_status = findViewById(R.id.settings_status);
-        done = findViewById(R.id.settings_done) ;
-        setting_name = findViewById(R.id.setting_name) ;
+        done = findViewById(R.id.settings_done);
+        setting_name = findViewById(R.id.setting_name);
 
-        firebaseAuth = FirebaseAuth.getInstance() ;
-        firebaseDatabase = FirebaseDatabase.getInstance() ;
-        firebaseStorage = FirebaseStorage.getInstance() ;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
 
 
-
-
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("user")
                 .child(firebaseAuth.getUid());
         StorageReference storageReference = firebaseStorage.getReference().child("upload")
-                .child(firebaseAuth.getUid()) ;
-
+                .child(firebaseAuth.getUid());
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -96,38 +93,37 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-               String _name =  setting_name.getText().toString() ;
-                String _status =  setting_status.getText().toString();
+                String _name = setting_name.getText().toString();
+                String _status = setting_status.getText().toString();
 
                 // Storing the image in Firebase Storage and getting its unique link
                 // to store in Database Reference
-                if(imageUri != null){
+                if (imageUri != null) {
                     storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 // getting the access token
                                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                       String fbImageURI = uri.toString() ;
+                                        String fbImageURI = uri.toString();
 
                                         // Saving the User object to Firebase Database
-                                        Users users = new Users(firebaseAuth.getUid(),_name, email ,fbImageURI,_status);
+                                        Users users = new Users(firebaseAuth.getUid(), _name, email, fbImageURI, _status);
                                         databaseReference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()) {
+                                                if (task.isSuccessful()) {
                                                     progressDialog.dismiss();
                                                     startActivity(new Intent(SettingsActivity.this,
                                                             HomeActivity.class));
-                                                    Toast.makeText(SettingsActivity.this,"Data Successfully Updated"
-                                                            ,Toast.LENGTH_SHORT).show();
-                                                }
-                                                else{
+                                                    Toast.makeText(SettingsActivity.this, "Data Successfully Updated"
+                                                            , Toast.LENGTH_SHORT).show();
+                                                } else {
                                                     progressDialog.dismiss();
-                                                    Toast.makeText(SettingsActivity.this,"Error in Updating the User"
-                                                            ,Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SettingsActivity.this, "Error in Updating the User"
+                                                            , Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
@@ -136,29 +132,27 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         }
                     });
-                }
-             else{
+                } else {
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            String fbImageURI = uri.toString() ;
+                            String fbImageURI = uri.toString();
 
                             // Saving the User object to Firebase Database
-                            Users users = new Users(firebaseAuth.getUid(),_name, email ,fbImageURI,_status);
+                            Users users = new Users(firebaseAuth.getUid(), _name, email, fbImageURI, _status);
                             databaseReference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
                                         progressDialog.dismiss();
                                         startActivity(new Intent(SettingsActivity.this,
                                                 HomeActivity.class));
-                                        Toast.makeText(SettingsActivity.this,"Data Successfully Updated"
-                                                ,Toast.LENGTH_SHORT).show();
-                                    }
-                                    else{
+                                        Toast.makeText(SettingsActivity.this, "Data Successfully Updated"
+                                                , Toast.LENGTH_SHORT).show();
+                                    } else {
                                         progressDialog.dismiss();
-                                        Toast.makeText(SettingsActivity.this,"Error in Updating the User"
-                                                ,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SettingsActivity.this, "Error in Updating the User"
+                                                , Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -181,16 +175,16 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
             }
         });
+    }
 
-     }
 
     // Taking the picture from gallery and set it on profile Image
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10){
-            if(data != null){
-                imageUri = data.getData() ;
+        if (requestCode == 10) {
+            if (data != null) {
+                imageUri = data.getData();
                 setting_image.setImageURI(imageUri);
             }
         }

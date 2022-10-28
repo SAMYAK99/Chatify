@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.projects.trending.chatify.R;
 import com.projects.trending.chatify.models.Users;
+import com.projects.trending.chatify.utils.PreferenceData;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -131,6 +132,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                                           @Override
                                                           public void onComplete(@NonNull Task<Void> task) {
                                                             if(task.isSuccessful()) {
+                                                                PreferenceData.setUserLoggedInStatus(RegistrationActivity.this,true);
+                                                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+                                                                PreferenceData.setLoggedInUserUid(RegistrationActivity.this,uid);
                                                                 progressDialog.dismiss();
                                                                 startActivity(new Intent(RegistrationActivity.this,
                                                                         HomeActivity.class));
@@ -157,6 +161,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                       @Override
                                       public void onComplete(@NonNull Task<Void> task) {
                                           if(task.isSuccessful()) {
+                                              PreferenceData.setUserLoggedInStatus(RegistrationActivity.this,true);
+                                              String uid = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+                                              PreferenceData.setLoggedInUserUid(RegistrationActivity.this,uid);
                                               progressDialog.dismiss();
                                               startActivity(new Intent(RegistrationActivity.this,
                                                       HomeActivity.class));
@@ -176,6 +183,7 @@ public class RegistrationActivity extends AppCompatActivity {
                           }else{
                               Toast.makeText(RegistrationActivity.this,"Something went Wrong! Please" +
                                               "Try again later" , Toast.LENGTH_SHORT).show();
+                              progressDialog.dismiss();
                           }
                       }
                   });

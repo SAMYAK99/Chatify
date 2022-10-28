@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.projects.trending.chatify.activity.HomeActivity;
 import com.projects.trending.chatify.activity.LoginActivity;
+import com.projects.trending.chatify.utils.PreferenceData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,8 +23,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
-                MainActivity.this.startActivity(mainIntent);
+                if(PreferenceData.getLoggedInUserUid(MainActivity.this).isEmpty()) {
+                    Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    MainActivity.this.startActivity(mainIntent);
+                }else{
+                    Intent mainIntent = new Intent(MainActivity.this, HomeActivity.class);
+                    MainActivity.this.startActivity(mainIntent);
+                }
                 MainActivity.this.finish();
             }
         }, 3000);

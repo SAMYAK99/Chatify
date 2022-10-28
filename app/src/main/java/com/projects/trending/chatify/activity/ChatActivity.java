@@ -100,6 +100,8 @@ public class ChatActivity extends AppCompatActivity {
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Clearing array list so it doesn't repeat itself
+                messagesArrayList.clear();
                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                    Messages message = dataSnapshot.getValue(Messages.class);
                      messagesArrayList.add(message);
