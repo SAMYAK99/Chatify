@@ -3,8 +3,8 @@
 A simple chat app build with Firebase
 
 <p align="center" >
-  <img src="./screenshot/shot1.png" >  
+  <img src="./screenshot/shot1.jpg" >  
 </p>
 <p align="center" >
-  <img src="./screenshot/shot2.png" >  
+  <img src="./screenshot/shot2.jpg" >  
 </p>
