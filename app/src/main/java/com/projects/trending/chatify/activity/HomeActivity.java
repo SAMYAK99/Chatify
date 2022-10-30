@@ -24,6 +24,7 @@ import com.projects.trending.chatify.MainActivity;
 import com.projects.trending.chatify.R;
 import com.projects.trending.chatify.adapters.UserAdapter;
 import com.projects.trending.chatify.models.Users;
+import com.projects.trending.chatify.notification.Client;
 import com.projects.trending.chatify.utils.PreferenceData;
 
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageView imgLogut, settingsImg;
     private long pressedTime;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
         TextView noBtn, yesBtn;
         noBtn = findViewById(R.id.no_btn);
         yesBtn = findViewById(R.id.yes_btn);
+
+
 
 //        imgLogut.setOnClickListener(new View.OnClickListener() {
 //            @Override

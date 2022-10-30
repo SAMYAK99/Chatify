@@ -50,20 +50,20 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-      Messages messages = messagesArrayList.get(position);
-      if(holder.getClass() == senderViewHolder.class){
-        senderViewHolder viewHolder = (senderViewHolder) holder ;
-        viewHolder.txtMessages.setText(messages.getMessage());
+        Messages messages = messagesArrayList.get(position);
+        if(holder.getClass() == senderViewHolder.class){
+            senderViewHolder viewHolder = (senderViewHolder) holder ;
+            viewHolder.txtMessages.setText(messages.getMessage());
 
-         // static variables are passing without referencing from Chat Activity
-          Picasso.get().load(sImage).into(((senderViewHolder) holder).profileImage);
+            // static variables are passing without referencing from Chat Activity
+            Picasso.get().load(sImage).into(((senderViewHolder) holder).profileImage);
 
-      }else{
-          reciverViewHolder viewHolder = (reciverViewHolder) holder ;
-          viewHolder.txtMessages.setText(messages.getMessage());
-          Picasso.get().load(rImage).into(((reciverViewHolder) holder).profileImage);
+        }else{
+            reciverViewHolder viewHolder = (reciverViewHolder) holder ;
+            viewHolder.txtMessages.setText(messages.getMessage());
+            Picasso.get().load(rImage).into(((reciverViewHolder) holder).profileImage);
 
-      }
+        }
     }
 
     // no. of times adapter will loop

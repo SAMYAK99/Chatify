@@ -73,6 +73,7 @@
 
     </LinearLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_MessageAdapter"
         android:layout_width="match_parent"
@@ -80,6 +81,10 @@
         android:layout_above="@+id/ll3"
         android:layout_below="@+id/profileLL"
         android:background="#ECE4E4" />
+
+
+
+
 
     <LinearLayout
         android:id="@+id/ll3"
